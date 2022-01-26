@@ -13,7 +13,12 @@ public static class ServiceRegistration
         if (env.IsEnvironment(LocalConfig.FunctionalTestingEnvName) || env.IsDevelopment())
         {
             services.AddDbContext<OpsDbContext>(options =>
-                options.UseInMemoryDatabase($"OpsManagement"));
+                options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+                    //Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? "placeholder-for-migrations",
+                    //builder => builder.MigrationsAssembly(typeof(OpsDbContext).Assembly.FullName))
+                    //        .UseSnakeCaseNamingConvention());
+            //services.AddDbContext<OpsDbContext>(options =>
+            //    options.UseInMemoryDatabase($"OpsManagement"));
         }
         else
         {

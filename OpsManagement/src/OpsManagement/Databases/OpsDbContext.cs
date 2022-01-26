@@ -18,7 +18,9 @@ public class OpsDbContext : DbContext
         DbContextOptions<OpsDbContext> options, ICurrentUserService currentUserService) : base(options)
     {
         _currentUserService = currentUserService;
+        Database.EnsureCreated();
     }
+
 
     #region DbSet Region - Do Not Delete
 
